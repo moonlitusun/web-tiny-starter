@@ -1,0 +1,7 @@
+# python
+venv
+
+# node
+node_modules
+.parcel-cache
+dist
