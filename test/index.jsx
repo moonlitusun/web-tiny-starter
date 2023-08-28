@@ -1,6 +1,6 @@
 const App = () => (
   <div>
-    React demo243
+    React demo
   </div>
 )
 
