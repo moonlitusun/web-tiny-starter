@@ -2,16 +2,22 @@ import sys
 import subprocess
 from os import path, getcwd
 from pathlib import Path
+import shutil
 from jinja2 import Template
 
 cwd = getcwd()
+args = sys.argv[1:]
 
 current_file = path.abspath(__file__)
-print(current_file)
 tpl_path = path.abspath(
     path.join(current_file, "../../template/jinja2.html")
 )
-args = sys.argv[1:]
+
+if args[0] == 'init':
+    init_dst = path.join(cwd, "./index.jsx");
+    if not path.exists(init_dst):
+        shutil.copy(path.abspath(path.join(current_file, "../../template/index.jsx")), path.join(cwd, "./index.jsx"))
+    sys.exit()
 
 with open(tpl_path, "r") as file:
     tpl = Template(file.read())
