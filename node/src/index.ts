@@ -5,7 +5,7 @@ import ejs from 'ejs';
 
 const cwd = process.cwd();
 
-const tplPath = path.resolve(__dirname, '../../../template/index.html');
+const tplPath = path.resolve(__dirname, '../../../template/ejs.html');
 const args = process.argv.slice(2);
 const tpl = fs.readFileSync(tplPath);
 const htmlContent = ejs.render(tpl.toString(), { entry: `../${args[0] || 'index.jsx'}` });
