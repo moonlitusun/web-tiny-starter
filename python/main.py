@@ -13,7 +13,7 @@ tpl_path = path.abspath(
     path.join(current_file, "../../template/jinja2.html")
 )
 
-if args[0] == 'init':
+if args and args[0] == 'init':
     init_dst = path.join(cwd, "./index.jsx");
     if not path.exists(init_dst):
         shutil.copy(path.abspath(path.join(current_file, "../../template/index.jsx")), path.join(cwd, "./index.jsx"))
