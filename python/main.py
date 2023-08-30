@@ -1,22 +1,25 @@
 import sys
+import signal
 import subprocess
 from os import path, getcwd
 from pathlib import Path
 import shutil
 from jinja2 import Template
 
+
 cwd = getcwd()
 args = sys.argv[1:]
 
 current_file = path.abspath(__file__)
-tpl_path = path.abspath(
-    path.join(current_file, "../../template/jinja2.html")
-)
+tpl_path = path.abspath(path.join(current_file, "../../template/jinja2.html"))
 
-if args and args[0] == 'init':
-    init_dst = path.join(cwd, "./index.jsx");
+if args and args[0] == "init":
+    init_dst = path.join(cwd, "./index.jsx")
     if not path.exists(init_dst):
-        shutil.copy(path.abspath(path.join(current_file, "../../template/index.jsx")), path.join(cwd, "./index.jsx"))
+        shutil.copy(
+            path.abspath(path.join(current_file, "../../template/index.jsx")),
+            path.join(cwd, "./index.jsx"),
+        )
     sys.exit()
 
 with open(tpl_path, "r") as file:
@@ -49,3 +52,14 @@ subprocess.run(
     ],
     cwd=cwd,
 )
+
+
+def signal_handler(signal, frame):
+    shutil.rmtree(".wts")
+    sys.exit(0)
+
+
+signal.signal(signal.SIGINT, signal_handler)
+
+while True:
+    pass
