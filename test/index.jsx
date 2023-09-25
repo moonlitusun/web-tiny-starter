@@ -1,7 +1,7 @@
 const App = () => (
   <div>
-    React demo2311
+    WTS Demo
   </div>
 )
 
-export default <App />;
+export default App;
