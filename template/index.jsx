@@ -1,7 +1,7 @@
-const App = () => (
-  <div>
-    React demo2311
-  </div>
-)
+import App from '../index.jsx';
 
-export default <App />;
+const AppWrapper = () => {
+  return <App></App>;
+};
+
+export default <AppWrapper></AppWrapper>;

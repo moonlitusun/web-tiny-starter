@@ -12,19 +12,20 @@ args = sys.argv[1:]
 
 current_file = path.abspath(__file__)
 tpl_path = path.abspath(path.join(current_file, "../../template/jinja2.html"))
+tpl_entry_path = path.abspath(path.join(current_file, "../../template/index.jsx"))
 
 if args and args[0] == "init":
     init_dst = path.join(cwd, "./index.jsx")
     if not path.exists(init_dst):
         shutil.copy(
-            path.abspath(path.join(current_file, "../../template/index.jsx")),
+            path.abspath(path.join(current_file, "../../template/init.jsx")),
             path.join(cwd, "./index.jsx"),
         )
     sys.exit()
 
 with open(tpl_path, "r") as file:
     tpl = Template(file.read())
-    entry = f"../{args[0] if args else 'index.jsx'}"
+    entry = f"./{args[0] if args else 'index.jsx'}"
     html_content = tpl.render(entry=entry)
 
 html_folder = path.join(cwd, "./.wts")
@@ -39,6 +40,11 @@ with open(html_path, "w") as file:
 def get_temp_path(filePath):
     return path.join(".wts", filePath)
 
+
+shutil.copy(
+    tpl_entry_path,
+    path.join(cwd, get_temp_path("index.jsx")),
+)
 
 subprocess.run(
     [
